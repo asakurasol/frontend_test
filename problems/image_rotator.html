@@ -51,8 +51,44 @@
 	<hr/>
 
 	<div id="rotator">
-		Rotator Here
 	</div>
+
+	<script>
+
+		/*
+
+		Todo
+
+		- refactor code to divide up header, description, and images
+		- make things prettier
+		- add animations
+
+		*/
+
+		//Store our content
+
+		var content = {
+			slide0: '<h4>Katarina</h4><p>Fruitcake bonbon donut jelly-o brownie biscuit marzipan pie.</p><img src="../img/kat_1.jpg" /><br/>',
+			slide1: '<h4>Red Card Katarina</h4><p>Cheesecake marzipan cupcake biscuit candy canes pudding.</p><img src="../img/kat_2.jpg" /><br/>',
+			slide2: '<h4>Kitty Cat Katarina</h4><p>Applicake topping halvah lemon drops wypas cotton candy.</p><img src="../img/kat_3.jpg" /><br/>',
+			slide3: '<h4>High Command Katarina</h4><p>Oat cake macaroon souffle cupcake chupa chups chocolate bar bear claw dragee lemon drops.</p><img src="../img/kat_4.jpg" /><br/>'
+		};
+
+		//initialize our rotator on window load
+		window.onload = init;
+
+		function init(){
+			var rotator = document.getElementById('rotator');
+			var counter = 0;
+			rotator.innerHTML = content.slide0;
+
+			window.setInterval(function(){
+				counter = (counter+1)%4;
+				rotator.innerHTML = content['slide'+counter];
+			},3000)
+		}
+
+	</script>
 </div>
 
 </body>
