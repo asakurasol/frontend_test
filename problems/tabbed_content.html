@@ -17,6 +17,34 @@
 			border: 1px solid #CCCCCC;
 			vertical-align:middle; margin-bottom: 3px;
 		}
+
+		.hide {
+			display: none;
+		}
+
+		.tab-controllers {
+			margin-top: 2em;
+		}
+
+		.tab-controllers h3{
+			border: 1px gray solid;
+			border-bottom: none;
+			padding: 5px;
+			display: inline;
+		}
+
+		.tab-content-container {
+			border: 1px gray solid;
+			margin-top: 4px;
+			padding: 10px;
+		}
+
+		h3.active {
+			color: red;
+			border: 3px gray solid;
+			border-bottom: none;
+		}
+
 	</style>
 </head>
 <body>	
@@ -42,21 +70,86 @@
 		<div id="container">
 			Turn this content into a tabbed container.
 
-			<h3>Tab 1</h3>
-			<p>
-				Gingerbread muffin gummies gingerbread macaroon. Lollipop candy applicake toffee faworki. Bear claw topping jelly toffee toffee powder tiramisu candy chupa chups. Chupa chups dragee icing applicake chupa chups dessert. Croissant jelly faworki marzipan tootsie roll marshmallow. Marshmallow toffee sweet roll fruitcake.
-			</p>
+			<div class="tab-controllers">
+				<h3 class="active tab-header" data-tab-num='tab-1'>Tab 1</h3>
+				<h3 class="tab-header" data-tab-num='tab-2'>Tab 2</h3>
+				<h3 class="tab-header" data-tab-num='tab-3'>Tab 3</h3>
+			</div>
 
-			<h3>Tab 2</h3>
-			<p>
-				Chocolate faworki croissant brownie halvah macaroon gummi bears wypas. Chupa chups icing gummies pudding dessert carrot cake. Cupcake jelly beans sweet roll icing ice cream apple pie tootsie roll gummi bears marzipan. Brownie gummies chupa chups pie. Cupcake jujubes topping. 
-			</p>
+			<div class="tab-content-container">
 
-			<h3>Tab 3</h3>
-			<p>
-				Cheesecake jelly beans ice cream lollipop sweet pastry. Chupa chups dessert cheesecake sesame snaps. Cookie ice cream candy canes pastry cake muffin. Icing chocolate sweet gummi bears powder oat cake oat cake lemon drops.
-			</p>
+				<div id="tab-1" class="tab-content">
+					<p>
+						Gingerbread muffin gummies gingerbread macaroon. Lollipop candy applicake toffee faworki. Bear claw topping jelly toffee toffee powder tiramisu candy chupa chups. Chupa chups dragee icing applicake chupa chups dessert. Croissant jelly faworki marzipan tootsie roll marshmallow. Marshmallow toffee sweet roll fruitcake.
+					</p>
+				</div>
+
+				<div id="tab-2" class="tab-content hide">
+					<p>
+						Chocolate faworki croissant brownie halvah macaroon gummi bears wypas. Chupa chups icing gummies pudding dessert carrot cake. Cupcake jelly beans sweet roll icing ice cream apple pie tootsie roll gummi bears marzipan. Brownie gummies chupa chups pie. Cupcake jujubes topping. 
+					</p>
+				</div>
+
+
+				<div id="tab-3" class="tab-content hide">
+					<p>
+						Cheesecake jelly beans ice cream lollipop sweet pastry. Chupa chups dessert cheesecake sesame snaps. Cookie ice cream candy canes pastry cake muffin. Icing chocolate sweet gummi bears powder oat cake oat cake lemon drops.
+					</p>
+				</div>
+
+			</div>
+
 		</div>
 	</div>
 </body>
+
+<footer>
+	<script>
+
+		/*
+
+		Todo
+
+		Style tabheader depending on which one is active
+		animation for transition?
+
+		*/
+
+		//initialize our rotator on window load
+		window.onload = init;
+
+		function init(){
+			//add click listeners to the tab headers
+			var tabHeaders = document.getElementsByClassName('tab-header');
+			Array.prototype.forEach.call(tabHeaders, function(tabHeader){
+				tabHeader.addEventListener("click", function(e){
+					setActiveTab(e.toElement.dataset.tabNum);
+				})
+			})
+		}
+
+		function setActiveTab(tabId){
+			console.log(tabId);
+			var tabs = document.getElementsByClassName('tab-content');
+
+			Array.prototype.forEach.call(tabs, function(tab){
+				if(tab.id === tabId){
+					removeClass(tab, 'hide');
+				} else {
+					addClass(tab, 'hide');
+				}
+			})
+		}
+
+		function addClass(element, newClass){
+			element.className += " " + newClass;
+		}
+
+		//this is a bad remove class function because it doesn't deal well with classes with similar names
+		function removeClass(element, oldClass){
+			element.className = element.className.replace(new RegExp(oldClass, 'g'), '');
+		}
+
+	</script>
+</footer>
 </html>
