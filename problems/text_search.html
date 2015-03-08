@@ -27,14 +27,15 @@
 	<hr/>
 
 	<h2>Search</h2>
-	<form>
+	<form id="search-form">
 		<input type="text" id="search_input" value="llama" />
 		<input type="submit" value="Search" />
 	</form>
 
 	<h3>Results</h3>
+	<div id='search-result'>
 	Found 0 occurances of the word "llama" in the below text.
-
+	</div>
 	<hr/>
 
 	<h2>Search Text</h2>
@@ -55,4 +56,39 @@
 </div>
 
 </body>
+
+<footer>
+	<script>
+
+		//Extra Credit
+		//highlight words that are found (require some parsing?)
+		//css on the search result
+
+		window.onload = init;
+
+		function init(){
+			//helper function for fetching text value and reset search input
+			function getSearchWord(){
+				var searchWord = document.getElementById('search_input').value
+				document.getElementById('search_input').value = '';
+				return searchWord;
+			}
+
+			function countWord(content, text){
+				return content.innerText.toLowerCase().split(text).length-1;
+			}
+
+			var form = document.getElementById('search-form');
+
+			form.addEventListener('submit', function(e){
+				e.preventDefault();
+				var searchWord = getSearchWord();
+				var wordCount = countWord(document.getElementById('search_text'), searchWord);
+				var result = 'Found '+wordCount+' occurances of the word "'+searchWord+'" in the below text.';
+				document.getElementById('search-result').innerHTML = result;
+			})
+		}
+
+	</script>
+</footer>
 </html>
