@@ -5,11 +5,22 @@
 	<link type="text/css" rel="stylesheet" href="../css/style.css" />
 	<style type="text/css">
 		#rotator {
+			margin-top: 50px;
 			width: 450px;
 			height: 300px;
-			border: 1px solid black;
-			background: #aaa;
 			text-align: center;
+		}
+
+		#rotator .description {
+			background-color: rgba(0,0,0,0.6);
+			position: relative;
+			top: 192px;
+			z-index: 1;
+		}
+
+		#rotator img {
+			position: relative;
+			top:-90px;
 		}
 	</style>
 </head>
@@ -65,7 +76,6 @@
 		Todo
 
 		- refactor code to divide up header, description, and images
-		- make things prettier
 		- add animations
 
 		*/
@@ -73,10 +83,10 @@
 		//Store our content
 
 		var content = {
-			slide0: '<h4>Katarina</h4><p>Fruitcake bonbon donut jelly-o brownie biscuit marzipan pie.</p><img src="../img/kat_1.jpg" /><br/>',
-			slide1: '<h4>Red Card Katarina</h4><p>Cheesecake marzipan cupcake biscuit candy canes pudding.</p><img src="../img/kat_2.jpg" /><br/>',
-			slide2: '<h4>Kitty Cat Katarina</h4><p>Applicake topping halvah lemon drops wypas cotton candy.</p><img src="../img/kat_3.jpg" /><br/>',
-			slide3: '<h4>High Command Katarina</h4><p>Oat cake macaroon souffle cupcake chupa chups chocolate bar bear claw dragee lemon drops.</p><img src="../img/kat_4.jpg" /><br/>'
+			slide0: '<div class="description"><h4>Katarina</h4><p>Fruitcake bonbon donut jelly-o brownie biscuit marzipan pie.</p></div><img src="../img/kat_1.jpg" /><br/>',
+			slide1: '<div class="description"><h4>Red Card Katarina</h4><p>Cheesecake marzipan cupcake biscuit candy canes pudding.</p></div><img src="../img/kat_2.jpg" /><br/>',
+			slide2: '<div class="description"><h4>Kitty Cat Katarina</h4><p>Applicake topping halvah lemon drops wypas cotton candy.</p></div><img src="../img/kat_3.jpg" /><br/>',
+			slide3: '<div class="description"><h4>High Command Katarina</h4><p>Oat cake macaroon souffle cupcake chupa chups chocolate bar bear claw dragee lemon drops.</p></div><img src="../img/kat_4.jpg" /><br/>'
 		};
 
 		//initialize our rotator on window load
