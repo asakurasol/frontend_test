@@ -60,17 +60,13 @@
 <footer>
 	<script>
 
-		//Extra Credit
-		//highlight words that are found (require some parsing?)
-		//css on the search result
-
 		window.onload = init;
 
 		function init(){
 			var form = document.getElementById('search-form');
 
 			form.addEventListener('submit', function(e){
-				e.preventDefault();
+				e.preventDefault(); //prevent submitting a form
 				var searchWord = getSearchWord();
 				var wordCount = countWord(document.getElementById('search_text'), searchWord);
 				var result = 'Found '+wordCount+' occurances of the word "'+searchWord+'" in the below text.';
@@ -78,7 +74,7 @@
 			});
 
 			//HELPER FUNCTIONS
-			
+
 			//helper function for fetching text value and reset search input
 			function getSearchWord(){
 				var searchWord = document.getElementById('search_input').value;

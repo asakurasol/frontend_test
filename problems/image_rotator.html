@@ -146,9 +146,9 @@
 			var counter = 0;
 
 			window.setInterval(function(){
-				window.setTimeout(removeClass.bind(null, slideItems[counter], 'active slide-out slide-in'), 750);
-				addClass(slideItems[counter], 'slide-out');
-				counter = (counter+1)%4;
+				window.setTimeout(removeClass.bind(null, slideItems[counter], 'active slide-out slide-in'), 750); //remove slide and unnecessary classes
+				addClass(slideItems[counter], 'slide-out'); //increment counter and reset to 0 if needed
+				counter = (counter+1)%4;//increment counter and reset to 0 if needed
 				addClass(slideItems[counter], 'active slide-in');
 			},3000)
 

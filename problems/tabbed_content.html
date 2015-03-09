@@ -108,12 +108,6 @@
 <footer>
 	<script>
 
-		/*
-		Todo
-		Style tabheader depending on which one is active
-		animation for transition?
-		*/
-
 		//initialize our rotator on window load
 		window.onload = init;
 
@@ -129,6 +123,8 @@
 			});
 
 			//HELPER FUNCTIONS
+			//setActive* just add and remove classes for our tabs and headers
+
 			function setActiveTab(tabId){
 				var tabs = document.getElementsByClassName('tab-content');
 
