@@ -23,6 +23,50 @@
 			position: relative;
 			top:-90px;
 		}
+
+		#rotator ul{
+		  position: relative;
+		  list-style: none;
+		}
+
+		#rotator ul > li {
+		  position: absolute;
+		}
+
+		#rotator ul > li:not(.active) {
+		  display: none;
+		}
+
+		@-webkit-keyframes side-out {
+		  0% {
+		    opacity: 1;
+		    transform: translateX(0px);
+		  }
+		  100% {
+		    opacity: 0;
+		    transform: translateX(-150px);
+		  }
+		}
+
+		@-webkit-keyframes slide-in {
+		  0% {
+		    opacity: 0;
+		    transform: translateX(150px);
+		  }
+		  100% {
+		    opacity: 1;
+		    transform: translateX(0px);
+		  }
+		}
+
+		#rotator ul > li.slide-in {
+		  animation: side-in 0.5s;
+		}
+
+		#rotator ul > li.slide-out {
+		  animation: slide-out 0.5s;
+		}
+
 	</style>
 </head>
 <body>
@@ -43,27 +87,47 @@
 	</p>
 
 	<hr />
-
-	<h4>Katarina</h4>
-	<p>Fruitcake bonbon donut jelly-o brownie biscuit marzipan pie.</p>
-	<img src="../img/kat_1.jpg" /><br/>
-
-	<h4>Red Card Katarina</h4>
-	<p>Cheesecake marzipan cupcake biscuit candy canes pudding.</p>
-	<img src="../img/kat_2.jpg" /><br/>
-
-	<h4>Kitty Cat Katarina</h4>
-	<p>Applicake topping halvah lemon drops wypas cotton candy.</p>
-	<img src="../img/kat_3.jpg" /><br/>
-
-	<h4>High Command Katarina</h4>
-	<p>Oat cake macaroon souffle cupcake chupa chups chocolate bar bear claw dragee lemon drops.</p>
-	<img src="../img/kat_4.jpg" /><br/>
-
-	<hr/>
-
 	<div id="rotator">
-	</div>
+		<ul>
+		<li class="active">
+			<div class="description">
+				<h4>Katarina</h4>
+				<p>Fruitcake bonbon donut jelly-o brownie biscuit marzipan pie.</p>
+			</div>
+			<img src="../img/kat_1.jpg" />
+			<br/>
+		</li>
+
+		<li>
+			<div class="description">
+				<h4>Red Card Katarina</h4>
+				<p>Cheesecake marzipan cupcake biscuit candy canes pudding.</p>
+			</div>
+			<img src="../img/kat_2.jpg" />
+			<br/>
+		</li>
+
+		<li>
+			<div class="description">
+				<h4>Kitty Cat Katarina</h4>
+				<p>Applicake topping halvah lemon drops wypas cotton candy.</p>
+			</div>
+			<img src="../img/kat_3.jpg" />
+			<br/>
+		</li>
+
+		<li>
+			<div class="description">
+				<h4>High Command Katarina</h4>
+				<p>Oat cake macaroon souffle cupcake chupa chups chocolate bar bear claw dragee lemon drops.</p>
+			</div>
+			<img src="../img/kat_4.jpg" />
+			<br/>
+		</li>
+
+	</ul>
+</div>
+	<hr/>
 
 </div>
 
@@ -81,27 +145,31 @@
 
 		*/
 
-		//Store our content
-
-		var content = {
-			slide0: '<div class="description"><h4>Katarina</h4><p>Fruitcake bonbon donut jelly-o brownie biscuit marzipan pie.</p></div><img src="../img/kat_1.jpg" /><br/>',
-			slide1: '<div class="description"><h4>Red Card Katarina</h4><p>Cheesecake marzipan cupcake biscuit candy canes pudding.</p></div><img src="../img/kat_2.jpg" /><br/>',
-			slide2: '<div class="description"><h4>Kitty Cat Katarina</h4><p>Applicake topping halvah lemon drops wypas cotton candy.</p></div><img src="../img/kat_3.jpg" /><br/>',
-			slide3: '<div class="description"><h4>High Command Katarina</h4><p>Oat cake macaroon souffle cupcake chupa chups chocolate bar bear claw dragee lemon drops.</p></div><img src="../img/kat_4.jpg" /><br/>'
-		};
-
 		//initialize our rotator on window load
 		window.onload = init;
 
 		function init(){
+
+			
 			var rotator = document.getElementById('rotator');
 			var counter = 0;
-			rotator.innerHTML = content.slide0;
+			var slideItems = rotator.getElementsByTagName('ul')[0].getElementsByTagName('li');
 
 			window.setInterval(function(){
+				removeClass(slideItems[counter], 'active');
+				removeClass(slideItems[counter], 'slide-in');
 				counter = (counter+1)%4;
-				rotator.innerHTML = content['slide'+counter];
+				addClass(slideItems[counter], 'active slide-in');
 			},3000)
+
+			function addClass(element, newClass){
+				element.className += " " + newClass;
+			}
+
+			//this is a bad remove class function because it doesn't deal well with classes with similar names
+			function removeClass(element, oldClass){
+				element.className = element.className.replace(new RegExp(oldClass, 'g'), '');
+			}
 		}
 
 	</script>
