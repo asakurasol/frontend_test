@@ -37,21 +37,21 @@
 		  display: none;
 		}
 
-		@-webkit-keyframes side-out {
+		@-webkit-keyframes slide-out {
 		  0% {
 		    opacity: 1;
 		    transform: translateX(0px);
 		  }
 		  100% {
 		    opacity: 0;
-		    transform: translateX(-150px);
+		    transform: translateX(-100px);
 		  }
 		}
 
 		@-webkit-keyframes slide-in {
 		  0% {
 		    opacity: 0;
-		    transform: translateX(150px);
+		    transform: translateX(300px);
 		  }
 		  100% {
 		    opacity: 1;
@@ -60,11 +60,11 @@
 		}
 
 		#rotator ul > li.slide-in {
-		  animation: side-in 0.5s;
+		  -webkit-animation: slide-in 0.75s;
 		}
 
 		#rotator ul > li.slide-out {
-		  animation: slide-out 0.5s;
+		  -webkit-animation: slide-out 0.75s;
 		}
 
 	</style>
@@ -136,39 +136,37 @@
 <footer>
 	<script>
 
-		/*
-
-		Todo
-
-		- refactor code to divide up header, description, and images
-		- add animations
-
-		*/
-
 		//initialize our rotator on window load
 		window.onload = init;
 
 		function init(){
 
-			
 			var rotator = document.getElementById('rotator');
-			var counter = 0;
 			var slideItems = rotator.getElementsByTagName('ul')[0].getElementsByTagName('li');
+			var counter = 0;
 
 			window.setInterval(function(){
-				removeClass(slideItems[counter], 'active');
-				removeClass(slideItems[counter], 'slide-in');
+				window.setTimeout(removeClass.bind(null, slideItems[counter], 'active slide-out slide-in'), 750);
+				addClass(slideItems[counter], 'slide-out');
 				counter = (counter+1)%4;
 				addClass(slideItems[counter], 'active slide-in');
 			},3000)
+
+			//HELPER FUNCTIONS
 
 			function addClass(element, newClass){
 				element.className += " " + newClass;
 			}
 
-			//this is a bad remove class function because it doesn't deal well with classes with similar names
-			function removeClass(element, oldClass){
-				element.className = element.className.replace(new RegExp(oldClass, 'g'), '');
+			//there is prob a better way to write this class remove function
+			function removeClass(element, oldClasses){
+				if(!oldClasses){
+					return undefined;
+				}
+				var oldClasses = oldClasses.split(' ');
+				oldClasses.forEach(function(oldClassName){
+					element.className = element.className.replace(new RegExp(oldClassName, 'g'), '');
+				})
 			}
 		}
 

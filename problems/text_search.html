@@ -67,17 +67,6 @@
 		window.onload = init;
 
 		function init(){
-			//helper function for fetching text value and reset search input
-			function getSearchWord(){
-				var searchWord = document.getElementById('search_input').value
-				document.getElementById('search_input').value = '';
-				return searchWord;
-			}
-
-			function countWord(content, text){
-				return content.innerText.toLowerCase().split(text).length-1;
-			}
-
 			var form = document.getElementById('search-form');
 
 			form.addEventListener('submit', function(e){
@@ -86,7 +75,21 @@
 				var wordCount = countWord(document.getElementById('search_text'), searchWord);
 				var result = 'Found '+wordCount+' occurances of the word "'+searchWord+'" in the below text.';
 				document.getElementById('search-result').innerHTML = result;
-			})
+			});
+
+			//HELPER FUNCTIONS
+			
+			//helper function for fetching text value and reset search input
+			function getSearchWord(){
+				var searchWord = document.getElementById('search_input').value;
+				document.getElementById('search_input').value = '';
+				return searchWord;
+			}
+
+			function countWord(content, text){
+				return content.innerText.toLowerCase().split(text).length-1;
+			}
+
 		}
 
 	</script>
